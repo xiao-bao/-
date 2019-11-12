@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// 克隆
+    let ary = [1,2,3,];
+    function deepClone(ary){
+    let ary2 = [];
+    for( let i=0; i<ary.length; i++ ){
+        //判断是不是 引用类型和null
+        if( ary[i] !==unll && typeof ary[i]==='object'){
+            ary2[i]=deepClone(ary[i]); //是就递归在循环
+ 
+        }else{
+            ary2[i]=ary[i];
+        }
+      
+    }
+    return ary2
+ }
+   console.log(ary)
+
+///
+        
+//克隆
+function deepClone(o){
+  let obj = o.push?[]:{};
+  for( let arrr in o ){
+      if( o[arrt] !==null&&typeof o[arrt]=== 'object'){
+          obj[arrt]=deepClone(o[attr]);
+      }else{
+        obj[arrt]=o[attr];
+      }
+  }
+  return obj;
+}  
+
+console.log(ary);   
+        
+///    
+//赋址问题
+let obj = {
+        name:'某智'
+    }
+
+function fn(o){//var o = obj;  把对象赋址给了0
+    o.name = '冉某';
+
+    o = { 
+        name:'彭某'
+    }
+    console.log(o.name); //'冉某'
+}
+
+fn(obj);//如果是实参是个引用类型，因为赋址是同一个地址那么在函数内执行修改这个参数的属性是会互相影响的
+console.log(obj);//'冉某'      
+    
+///
+//重写call
+
+Function.prototype.mycall = function(that,...arg){
+ 
+        let type = typeof that;  //判断this指向是什么类型的
+        if(that === null || that === undefined){
+            that = window;
+        }else{
+            switch(type){
+                case 'string':
+                    that = new String(that);
+                break;
+                case 'boolean':
+                    that = new Boolean(that);
+                break;
+                case 'number':
+                    that = new Number(that);
+                break;
+            }
+        }
+    that.fn = this;
+    that.fn(...arg);   
+    console.log(that);
+} 
+//   
+//检测数据类型     
+class Tools {
+        static type(data){
+            if(typeof data !== 'object'){
+                return typeof data;
+            }
+            let obj = {
+                object:'Object',
+                array:'Array',
+                null:'Null'
+            }
+            let toS = Object.prototype.toString;
+            for(let attr in obj){
+                if(toS.call(data) === `[object ${obj[attr]}]`){
+                    return attr;
+                }
+            }
+        }
+    }
+
+    console.log( Tools.type([]) ); 
+
+//
+class Tools {
+        static type(data){//传的是数据，然后通过这个数据检测它的类型data
+           
+            if(typeof data !== 'object'){
+                return typeof data;
+            }
+            let obj = {
+                object:'Object',
+                array:'Array',
+                null:'Null'
+            }
+            let toS = Object.prototype.toString;
+            for(let attr in obj){
+                if(toS.call(data) === `[object ${obj[attr]}]`){
+                    return attr;
+                }
+            }
+        }
+    }
+
+  
+    </script>
+</body>
+</html>

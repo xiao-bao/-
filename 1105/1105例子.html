@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 例题
+        //    function fn(){
+
+        //    }
+        //    Object.prototype.a=20;
+        //    fn.prototype.a = function(){
+        //        console.log(this);
+        //    };
+        //    console.dir(new fn()._proto_===fn.prototype); //ture 实例对象下的_proto_属性全等实例函数的原型
+        //    console.log(fn.prototype) // {a:f}
+        //    console.log(new fn()._porto_.a) //  ƒ (){console.log(this);}
+        //    new fn()._proto_.a();  // {a:f} 
+        //    new fn().a();  // fn{}; //点前面的主 this
+
+        //   console.log(new fn().a);  //ƒ (){console.log(this);}
+        //   console.log(new String('123'))  // {'123'}
+        //   console.log(typeof object);    //undefined
+        //   console.log(typeof Function);  //function
+        //   console.log(Object instanceof Object); //true
+
+
+        // 修改构造函数的指向  constructor 例如：
+        // function Fn(){
+
+        // }
+        // Fn.prototype ={
+        //   constructor:Fn
+        // };
+        // console.log(Fn.prototype.constructor);
+
+
+// 例题
+        // function Fn() {
+        //     this.x = 100;
+        //     this.y = 200;
+        //     this.getX = function () {
+        //         console.log(this.x);
+        //     }
+        // }
+        // Fn.prototype = {
+        //     y: 400,
+        //     getX: function () {
+        //         console.log(this.x);
+        //     },
+        //     getY: function () {
+        //         console.log(this.y);
+        //     },
+        //     sum: function () {
+        //         console.log(this.x + this.y);
+        //     }
+        // };
+        // var f1 = new Fn();
+        // var f2 = new Fn;
+        // // console.log(f1.getX === f2.getX); //f1.getX 100   f2.getX 函数  false
+        // // console.log(f1.getY === f2.getY); //true
+        // // console.log(f1._proto_.getY === Fn.prototype.getY);//true  
+        // // console.log(f1._proto_.getX === f2.getX); //100  函数  false
+        // // console.log(f1.getX === Fn.prototype.getX); //函数 false
+        // // console.log(f1.constructor);//Object
+        // // console.log(Fn.prototype._proto_.constructor);//Object
+        // // f1.getX();//100
+        // // f1._proto_.getX();//undefined
+        // // f2.getY();//200
+        // // Fn.prototype.getY();//400
+        // // f1.sum();//300
+        // Fn.prototype.sum(); //NaN
+
+
+// 例题
+
+    //   function Foo(){
+    //       getName=function(){console.log(1);};
+    //       return this;
+    //   }
+    // Foo.getName =function(){console.log(2);};
+    // Foo.prototype.getName =function(){console.log(3);};
+    // var getName =function(){console.log(4);};
+    // function getName(){console.log(5);}
+
+    // Foo.getName();  //2
+    // getName();  //4
+    // Foo().getName();  //1
+    // getName();
+    // var a = new Foo.getName();//2
+    // var b = new Foo().getName();  //3
+    // var c = new new Foo().getName //3
+
+
+
+
+// 例题
+
+        //      let ary =[1,2,3];
+        //      Array.prototype.mypush = function(...arg){
+        //          let nary = this.concat(arg);
+        //          let len = nary.length;
+        //          for( let i=0; i<len; i++ ){
+        //              this[i] = nary[i];
+        //          }
+        //          return len;
+        //      }
+
+        //     console.log (ary.mypush(4,5,6));
+        //     console.log(ary);
+
+
+
+        // Array.prototype.myconcat = function(...arg){
+        //     return [...this,...arg.flat(Infinity)];
+        // }
+        
+        // console.log(ary.myconcat([4,5],[6,7]).myconcat([8,9]));
+
+
+// 例题
+
+        // function fn(a,b){
+        //     console.log(this,a,b);
+        // }
+        // fn.call(document,1,2);
+        // fn.apply(document,[1,2])
+
+        // fn.bind(document,1,2)()
+        // fn.bind(document)(1,2)
+
+// 例题
+    document.onclick = fn();
+    function fn(){
+        console.log(this);
+    }
+
+    document.onclick = (function(){
+        console.log(this); //window
+        return function fn(){
+            console.log(this);//document
+        }
+    })();
+
+//## ****
+    document.onclick = function(){
+        setTimeout(new fn,1000);
+        function fn(){
+            console.log(this);  //fn{}  报错
+        }
+    }
+
+//## ****
+    var name = '小强';
+    var obj = {
+        name:'zf',
+        getName:function(){
+            console.log(this.name);//window.name
+        }
+    }
+    setTimeout(obj.getName,1000);
+
+    obj.getName();
+
+//## ****
+    function Fn(){
+         this.name1 = 'zf';
+     }
+     Fn.prototype.name1 = '小明';
+     Fn.name1 = '小强';
+     Function.prototype.name1 = '小花';
+    
+        function Object(){} -> Function.prototype.name1
+    
+     console.dir(Object.name1); 
+
+//## ****
+
+     function Fn(){
+        // this.name1 = 'zf';
+    }
+    Fn.prototype.name1 = function(){
+        console.log(this);//Fn.prototype
+        let fn = ()=> {
+            console.log(this);//Fn.prototype Fn{}
+        }
+        fn();
+    };
+    Fn.name1 = function (){
+        console.log(this);
+    }
+    Function.prototype.name1 = function(){
+        console.log(this);
+    } 
+    new Fn().name1();//Fn{}
+    Fn.prototype.name1();
+
+//## ****
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

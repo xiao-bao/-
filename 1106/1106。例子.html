@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+   //例子
+   function fn(){}
+   Fn.prototype.a=function(){sonsole.log('1');}
+   Fn.a =function(){console.log('3');}
+   Function.a = function(){console.log('4');}
+   Function.prototype.a = function(){console.log('5');}
+   object.a =function(){console.log('6');};
+   object.prototype.a =function(){console.log('7');};
+    Fn.prototype.a = function(){console.log('2');};
+    let f = new Fn();
+
+
+
+    Fn.prototype.a(); //2
+    f.a(); //2 new Fn().a()=> Fn.prototype.a 有两个，后面函数覆盖前面函数
+    Fn.a(); //3
+    Function.a()  //4
+    object.a(); //6
+    Function.prototype.a() //5
+    Fn.a();3
+    
+// 面试题
+  var a=1;
+  a.a =2 ;
+  console.log(a.a) //undefined  简单类型加属性就是undefined a是简单类型
+
+  const x={
+
+      a:1,
+      c:{
+          a:3,
+          c:{
+              a:5,
+              d:function(){
+                  console.log(this.a)
+              }
+          }
+      }
+  }
+ const y=x.c.c.d;
+ x.c.c.d(); // 5    因为有this' this有个属性，点前面的是谁就是谁
+ y();  //undefined   y的父级是window 没有整个值输出就是undefined
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+         形参赋值  
+         ***********************************
+         变量提升（预解析）
+          var a  undefined
+              a=function （）{ var b = 30;
+                    alert(5);}
+        ***********************************
+           执行上下文
+    
+           因为先执行函数，所以把函数提到第一位开始执行
+           a=function （）{ var b = 30;
+                    alert(5);}
+    
+           a=10
+           
+        */
+        // alert(a);   // a=function （）{ var b = 30;alert(5);}
+
+        // var a = 10;
+        // function a(){   //这个函数已经提到 a=10 前面执行了 ，所以没有了
+        //     var b = 30;
+        //     alert(5);
+        // }
+        // a(); //报错  因为a = 10;是数字没有办法执行，所以结果是报错
+
+
+
+        // 例2
+
+        /*
+        
+         形参赋值  
+             ***************
+        变量提升（预解析）
+        
+          a=function (){alert(1);}  //和 var a 比， var a 被干掉了 
+           var a 
+           var b       // 只有b一个 没得比
+           a=function a(){alert(333);}  // 都是函数，下面函数覆盖上面的函数
+        
+            ****************
+        变量提升（预解析） 结果
+        
+        a=function a(){alert(333);}
+        var b  
+        
+            *****************
+        执行上下文(到这一步只看执行函数带括号的a()，b(a)，alert(a) )
+        
+        a=function a(){alert(333);}
+        var b 
+        
+        
+        
+        */
+
+
+        // function a(){
+        //         alert(1);
+        //     }
+        //     a(); //function a(){alert(333);}  => 333
+
+        //     var a = function (){alert(a);}
+        //     alert(a);//function (){alert(a);}
+
+        //     var a = 30;
+        //     alert(a);//30
+
+        //     var b = function(a){
+        //         var a = 50;
+        //         alert(a);
+        //     }
+        //     b(a);//50
+
+        //     alert(a);// 30
+
+        //     function a(){
+        //         alert(333);
+        //     }
+        //     alert(a);// 30
+
+
+        // 例3
+
+        // var b = 10;
+        // function fn(){
+        //     alert(a);   //undefined
+        //     alert(b);   //undefined
+        //     var a = 20;
+        //     b = 50;
+        //     alert(a);//20
+        //     var b;
+        // }
+        // fn();
+        // alert(b); //10
+
+
+
+        // 例4
+
+        // var b = 10;
+        // function fn(){
+
+        //     alert(a); //undefined
+        //     var a = 20;
+        //     alert(b); //undefined
+        //     window.b = 30;
+        //     alert(a);//20
+        //     b = 50;
+        //     var b;
+        // }
+        // fn();
+        // alert(b);//30   // window.b = 30; 用的是这个30
+
+
+        // 例5
+
+
+        // var a = 20;
+        //     function fn(a){ //var a = 20
+        //         alert(a);//20
+        //         var b = 30;
+        //         a = 40;
+        //         alert(a);//40
+        //     }
+        //     fn(a);
+        //     alert(a); //20  这个20是函数外面的20
+
+
+
+        // 例6  
+
+        /*
+              形参赋值: ''
+              *********
+              预解析:
+                  // var a
+                  a = function a(){}
+                  b = function b(){}
+                  var c
+              *********
+              执行上下文:
+                  function a(){}
+                  a = 5   
+                  b = 6
+                  c = d = b      window.d = 6;
+  
+          */
+
+        +function () {
+
+            console.log(a) //函数function a(){}
+            var a = 5;
+            function a() { }
+            console.log(a) //5
+            function b() { }
+            b = 6
+            console.log(b) //6   因为6是在函数b = function b(){} 的后面
+            var c = d = b
+        }()
+        console.log(d) //  6   window.d
+        console.log(c) //  因为还能输中找不到变量c 报错
+
+
+
+
+   // 例7
+
+       
+        /*
+            事件触发是谁，this就是谁
+            window  全局打印this  fn()  this是window
+            对象下的this 就是.前面的主
+        */
+        var obj = {
+            val: 2,
+            dbl: function () { //001
+                var val = 45;
+                console.log(this); //obj
+                this.val *= 2;
+                console.log(val); //45
+                console.log(this.val);//4
+            }
+        }
+        var ff = obj.dbl(); //obj  45 4    
+        
+
+
+        fn = function () {
+            var val = 45;
+            console.log(this); //window 
+            this.val *= 2;
+            console.log(val); //45
+            console.log(this.val);//NaN
+        }
+
+        var fn = obj.dbl; //window  45  NaN
+        fn();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

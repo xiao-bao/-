@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .active {
+            background: yellow;
+        }
+
+        #box div,
+        #box2 div {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+            display: none;
+        }
+
+        #box div.show,
+        #box2 div.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"> </div>
+</body>
+<div id="box">
+    <button class="active" index="0">按钮一</button>
+    <button index="1">按钮二</button>
+    <button index="2">按钮三</button>
+    <div class="show">11111</div>
+    <div>22222</div>
+    <div>33333</div>
+</div>
+<div id="box2">
+    <button class="active" index="0">按钮一</button>
+    <button index="1">按钮二</button>
+    <button index="2">按钮三</button>
+    <div class="show">11111</div>
+    <div>22222</div>
+    <div>33333</div>
+</div>
+<script>
+
+//例子
+
+function Tab(id){
+  this.box = document.getElementById(id);
+  this.divs = this.box.querySelectorAll('div');
+  this.bths = this.box.querySelectorAll('button');
+  this.prevIndex = 0;
+  this.timer;
+  this.num=0;
+
+}
+
+Tab.prototype.events = function (evName='onclick'){
+    const that = this ;
+    for( let i= 0, len=this.bths.length; i< len; i++  ){
+        this.bths[i][evName] = function(){
+            that.change(i);
+        }
+
+    }
+}
+
+Tab.prototype.change = function(i){
+ 
+ this.bths[this.prevIndex].className = this.divs[this.prevIndex].className ='';
+ this.bths[i].className = 'active';
+ this.divs[i].className ='show';
+ this.prevIndex = i;
+}
+
+Tab.prototype.play =function(){
+    this.timer= setInterval(()=>{
+      this.num ++;
+      this.num%=this.bths.length;this.change(this.num);
+
+    },500);
+}
+
+Tab.prototype.stop =function(){
+    clearInterval(this.timer);
+    this,timer =null;
+}
+
+Tab.prototype.IsAutoplay =function(){
+    return this.timer;
+}
+
+let t = new Tab('box');
+let t2 = new Tab('box2');
+t.events();
+
+bth1.onclick = function(){
+    t2.stop();
+}
+
+bth2.onclick=function(){
+    t.play();
+}
+
+bth3.onclick =function(){
+    if( t.IsAutoplay()){
+        t.stop();
+
+    }else{
+        t.play();
+    }
+  if( t2.IsAutoplay()){
+    t2.stop();
+  }else{
+      t2.play();
+  }
+}
+ //t.play();
+
+
+
+
+
+
+
+
+
+
+//例子
+/*
+ 定点清除
+    1.先把刚刚的class清除
+    2.再把当前的class添加上
+*/
+
+//操作谁就获取谁
+const bths = document.querySelectorAll('button');
+const divs = document.querySelectorAll('#box div');
+let prevTndex = 0;
+ // 循环bths每一项
+bths.forEach((element,index)=>{
+    //绑定点击事件
+    element.onclick =function(){
+    //清空按钮和文本框的样式
+  bths[prevTndex].className ='';
+  divs[prevIndex].className ='';
+    //给点击按钮增加颜色
+  this.className = 'active';
+    // 加index 是为了 链接 显示
+  divs[index].className='show';
+    //为了就出现一个文本框
+    prevIndex =index;
+    }
+
+});
+
+
+
+//例子
+
+function move({x = 0, y = 0} = {}) {
+  return [x, y];
+}
+
+move({x: 3, y: 8}); // [3, 8] move({x = 0, y = 0} = {x: 3, y: 8})
+move({x: 3}); // [3, 0]       move({x = 0, y = 0} = {x: 3})
+move({}); // [0, 0]           move({x = 0, y = 0} = {})
+move(); // [0, 0]             move({x = 0, y = 0})
+
+
+function move({x, y} = { x: 0, y: 0 }) {
+  return [x, y];
+}
+
+move({x: 3, y: 8}); // [3, 8]         move({x, y} = {x: 3, y: 8})
+move({x: 3}); // [3, undefined]       move({x, y} = {x: 3})
+move({}); // [undefined, undefined]   move({x, y} = {})
+move(); // [0, 0]                     move({x, y})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>
