@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+
+        const img = document.createElement('img'); //在document添加一个img
+        img.src = 'img/1x.jpg'; //当作毁坏的图片，故意让找不到
+        img.onload = function () { //onload事件加载完成
+            console.log('成功')
+        }
+        img.onerror = function () { //onerror 事件加载失败
+            console.log('失败')
+            this.scr = 'img/timg.jpg'; //当图片损坏，直接用这个默认图片
+        }
+        //console.log(img.scr)
+
+        box.append(img); // 把添加的img 添加在box里面
+
+
+    </script>
+</body>
+
+</html>

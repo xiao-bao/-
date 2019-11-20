@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="head">
+            <li><img src="./img/head1.png" alt=""></li>
+            <li><img src="./img/head2.jpg" alt=""></li>
+            <li><img src="./img/head3.jpg" alt=""></li>
+            <li><img src="./img/head4.jpg" alt=""></li>
+            <li><img src="./img/head5.jpg" alt=""></li>
+        </ul>
+        <ul class="body">
+            <!-- <li>
+                <div class="img_box">
+                    <img src="./img/1.jpg" alt="">
+                    <p class="desc">所谓伊人，在水一方！</p>
+                    <p class="author">泰勒·斯威夫特</p>
+                </div>
+            </li> -->
+
+        </ul>
+    </div>
+    <script>
+        const box = document.querySelector('.body'); //获取图片li
+        const head = document.querySelector('head');
+        console.log(head)
+
+        //找到数组中最小的图片和值
+        // 这样写的原因因为到时候要调用，比较方便
+        function minIndex(ary) {
+
+            let min = Math.min(...ary); //查找数组的最小图片
+            //找到每一项的索引位置以及对应的值
+            let index = ary.findIndex(item => item === min)
+            return {
+                index, min
+            }
+        }
+        //防抖
+        function debounce(cb, time) {
+            let timer; //创建一个变量
+            return function () {
+                //当事件触发的时候先关闭上次的timer
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    cb.call(this, ...arg);
+                    // console.log(this)
+                }, time);
+            }
+        }
+        //节流
+        function throttling() {
+            let prevtime = 0, timer;
+            return function () {
+                let nowTime = +new Data;
+                if (nowTime - prevtime > time) {
+                    cb.call(this, ...arg);
+                } else {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => {
+                        if (+new Data - prevtime > time) {
+                            cb.call(this, ...arg)
+                        }
+                    }, time);
+                }
+                prevtime = nowTime;
+            }
+        }
+
+
+        //瀑布流
+        const picw = 236;
+        const ml = 10;
+        const boxt = 66;
+        let clientw = document.documentElement.clientWidth;
+
+        let len = Math.floor(clientw / (picw + ml));
+        box.style.width = (len * (picw + ml) - ml + 'px')
+
+        let aryx = [];
+        let aryy = [];
+
+        for (let i = 0; i < len; i++) {
+            aryx[i] = i * (picw + ml);
+            aryy[i] = 0;
+
+        }
+
+        function render() {
+
+            fetch('../data.json').them(d => d.json()).them(ary => {
+
+                ary.forEach((item, i) => {
+                    let { index } = minIndex(aryy);
+                    let li = document.createElement('li');
+                    li.style.cssText = `top:${arryy[index]}px;left:${aryx[index]}px`;
+
+                    let div = document.createElement('div');
+                    div.className = 'img_box';
+                    let img = document.createElement('img');
+                    img.src = item.pic;
+
+                    let p1 = document.createElement('p');
+                    let p2 = document.createElement('p');
+                    p1.className = 'desc';
+                    p1.innerText = item.desc;
+                    p2.className = 'author';
+                    p2.innerText = item.author;
+                    div.append(img);
+                    div.append(p1);
+                    div.append(p2);
+                    li.append(div);
+                    box.append(li);
+                    setTimeout(() => {
+                        img.style.opacity = 1;
+                    }, 200);
+
+                    aryy[index] += (boxt + item.height * 1 + 20);
+                });
+
+            });
+
+        };
+
+        render()
+
+        let iH = window.innerHeight;
+        window.onscroll = debounce(fn, 200);
+        function fn() {
+
+            let { index } = minIndex(aryy);
+            let scroll = window.pageYOffset;
+            if (iH + scroll >= aryy[index]) {
+                console.log('触底了');
+                render();
+            };
+
+        };
+
+
+
+        window.onresize = function () {
+            clientW = document.documentElement.clientWidth;
+            len.style.width = (len * (picw + ml) - ml + 'px')
+            aryx.length = 0;
+            aryy.length = 0;
+            iH = window.innerHeight;
+            for (let i = 0; i < len; i++) {
+                aryx[i] = i * (picw + ml);
+                aryy[i] = 0;
+            }
+
+            const lis = box.querySelectorAll('li');
+            lis.forEach((ele, i) => {
+                let { index } = minIndex(aryy);
+                ele.style.cssText = `top:${arry[index]}pc;left:${arry[index]}px`;
+                arry[index] += (ele.scrollHeight + 10);
+            });
+
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

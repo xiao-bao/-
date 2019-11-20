@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><title>获取 可视区，滚动条</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h4 id="获取-可视区滚动条">获取 可视区，滚动条</h4>
+
+
+
+<h5 id="dom-获取可视区的高宽">DOM 获取可视区的高/宽</h5>
+
+<ul><li><p>document.documentElement.clientHeight</p></li>
+<li><p>document.documentElement.clientWidth  //如果有滚动条，会减去滚动跳的宽度</p></li>
+<li></li>
+<li><p>element.getBoundingClientRect( ) //返回值是一个对象，这个对象里面有元素的绝对位置</p></li>
+<li><p>document.documentElement.scrollTop</p></li>
+</ul>
+
+
+
+<h5 id="bom">BOM:</h5>
+
+<ul><li><p>window.innerHeight/window.innerWidth,如果有滚动条，不会减去滚动条的宽度</p>
+
+<ul>
+<li><p>window.pageXOffset/window.pageYOffset  滚动条的距离</p></li></ul></li>
+</ul></div></body></html>

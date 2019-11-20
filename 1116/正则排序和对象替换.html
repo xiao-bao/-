@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+
+      /*
+         把下面str的name，age，say换成obj中的value值
+      */
+
+/*
+  1.先用 正则中的replace把数据提取出来，然后循环，
+  2. 把得到的数据，变成对象的属性名，因为数组赋值时一一对应的，我们得到的值有四个，只需要第二个，所以在key的前面价格逗号，把key变成第二个参数
+  3. return出去
+*/
+
+      let obj = {
+         name: '小明',
+         age: 18,
+         say: '好好学习，天天向上'
+      }
+      let str = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+      // let s = str.replace(/\{(\w+)\}/g, function (...arg) {
+      //    // 加逗号的原因，因为正则replace 有四个参数，只有第二个参数是我们想要的，所以要一一对应，key也是第二个值
+      //    let [, key] = arg;
+      //    return obj[key];
+      // });
+      // console.log(s);
+
+
+
+
+      let str1 = str.match(/\{(\w+)\}/g);
+      ary1 = [];
+      for (let i = 0; i < str1.length; i++) {
+
+         let aa = str1[i].indexOf('{');
+         //console.log(aa);
+         let bb = str1[i].lastIndexOf('}');
+         let cc = str1[i].substring(aa + 1, bb)
+         ary1.push(obj[cc]);
+      }
+
+      console.log(ary1);
+
+
+
+
+
+
+
+      /*
+          计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+      */
+
+      /*
+      思路：
+          1.因为是字符串，先用字符串的方法切割，排序，在变成字符串
+          2.再用正则replace，，创建两个变量，一个是初始值为零（属性值），一个是空串（变量）
+          3.if判断大于当前值就进入，就会得到最大值，和变量
+
+       */
+
+      // let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+      // let mun = 0;
+      // let key = '';
+      // str2 = str2.split("").sort().join('');
+      // //console.log(str2.match( /([\da-z])\1+/  ));
+      // str2.replace(/([\da-z])\1+/g, ($0, $1) => {
+      //    if ($0.length > mun) {
+      //       mun = $0.length;
+      //       key = $1;
+      //    }
+
+      // });
+      // console.log(`${key}字符出现的次数最多,出现了${mun}次`);
+
+
+
+
+      // let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+      // let obj = {};
+      // let mun = 0;
+      // str2.forEach((item) => {
+      //    if (  ) {
+
+
+
+      //    } else {
+
+      //    }
+      // });
+      // console.log(str2)
+
+
+   </script>
+</body>
+
+</html>

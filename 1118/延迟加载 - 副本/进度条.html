@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 1280px;
+            height: 10px;
+            border: 2px solid lawngreen;
+        }
+/* 思考css配合中需要注意的  box1 */
+        #box1 {  
+            height: 10px;
+            width: 0;
+            background: lightsalmon; 
+            transition: .2s;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="box">
+        <div id="box1"></div>
+    </div>
+    <script>
+
+        /*
+        1.创建一个变量，为进度条的初始值  
+        2.添加图片，循环
+        3. 把路径赋给图片
+        4.然后事件，每显示好一张图片，进度条增加多少
+        5.添加其他效果， 其中一个当图片出现问题，调用函数，让其正常运行
+                */
+        let ary = [
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-159497091.jpg',
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-152360031.jpg',
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-153725613.jpg',
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-153779846x.jpg'
+        ];
+
+        let num = 0; //创建进度条的初始值
+        ary.forEach(img => {
+            let pic = document.createElement('img');  //添加图片
+            pic.src = img; // 把图片路径赋值给图片scr找到图片
+            //console.log(pic)
+            pic.onload = function () { 
+                box1.style.width = 25 * (++num) + '%';// 每加载好一张图片就让进度条增加25%的颜色
+                //  console.log( box1.style.width)
+                if (25 * num === 100) {//加载完成好以后
+                    body.style.transition = '10s'; //背景颜色10秒后显示
+                    body.style.background = 'hotpink'; //背景颜色
+
+                }
+            }
+             pic.onerror = function(){//事件在加载过程中出现问题了
+                 pic.onload(); //调用函数正常执行显示
+             }
+        });
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
