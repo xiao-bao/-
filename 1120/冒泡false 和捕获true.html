@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡</title>
+</head>
+<style>
+div{
+    padding:100px;
+}
+#box{
+    background: red;;
+}
+#box1{
+    background:slateblue;
+}
+#box2{
+    background:teal;
+}
+#btn{
+    background:tomato;
+}
+
+</style>
+<body>
+<div id="box">
+        <div id="box1">
+            <div id="box2">
+                <button id="btn">按钮</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+box.onclick = function(){
+        alert('box')
+    }
+    box1.onclick = function(){
+        alert('box1')
+    }
+    box2.onclick = function(){
+        alert('box2')
+    }
+    btn.onclick = function(ev){
+        alert('btn')
+        // ev.cancelBubble = true;  阻止冒泡 false是冒泡  true是捕获 组织冒泡
+        // ev.stopPropagation();    阻止冒泡
+        //console.log(ev)
+    }
+
+</script>
+</body>
+</html>

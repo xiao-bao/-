@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+#box1{
+    width:100px;
+    height:100px;
+    background: tomato;
+}
+#box2{
+    width:30px;
+    height:30px;
+    background: turquoise;
+}
+</style>
+<body>
+<div id="box1">
+    <div id="box2"></div>
+</div> 
+<script>
+/*
+onmouseover  onmouseout  盒子套盒子，子盒子有影响
+onmouseenter  onmouseleave  盒子套盒子，对子盒子没有影响
+
+*/
+box1.onmouseenter = function(){
+    console.log('大盒子移入')
+}
+box1.onmouseleave = function(){
+    console.log('大盒子移出')
+}
+
+box2.onmouseenter = function(ev){
+    console.log('xiao盒子移入')
+    // ev.cancelBubble = true;
+}
+box2.onmouseleave = function(){
+    console.log('xiao盒子移出')
+}
+
+
+</script>
+</body>
+</html>

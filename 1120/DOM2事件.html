@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="box">
+    <div id="box1">
+        <div id="box2">
+            <button id="btn">按钮</button>
+        </div>
+    </div>
+</div>
+<script>
+    /*
+    考察的知识点是，true 和false
+    同时存在冒泡和捕获，不按代码从上往下执行，优先执行捕获true，再执行按钮（目标元素），按钮按照从上往下执行，再执行冒泡false
+    */
+    box.addEventListener('click',function(){
+        alert('box冒泡');
+    },false);
+    box.addEventListener('click',function(){
+        alert('box捕获');
+    },true);
+
+
+    box1.addEventListener('click',function(){
+        alert('box1');
+    },false);
+    box2.addEventListener('click',function(){
+        alert('box2');
+    },false);
+
+    
+    btn.addEventListener('click',function(){
+        alert('btn_冒泡');
+    },false);
+    btn.addEventListener('click',function(){
+        alert('btn_捕获');
+    },true);
+
+   
+    box1.addEventListener('click',function(){
+        alert('box1');
+    },true);
+    box2.addEventListener('click',function(){
+        alert('box2');
+    },true); 
+</script>  
+</body>
+</html>

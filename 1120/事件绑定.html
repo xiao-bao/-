@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<button id="btn">按钮</button> 
+<script>
+/*
+
+解除事件函数 -> 给元素事件赋值 null即可
+
+DOM0  带on的事件方式是DOM0中的标准，同时操作两个相同事件，第二个会覆盖第一个
+DOM2 事件绑定 -> addEventListener() 括号里有三个参数，第一个是"不带on的事件名" 第二个是事件函数，第三个是布尔值或者对象， 布尔值为false是冒泡 布尔值为true是捕获 默认的是false
+*/
+
+// window.addEventListener('click',function(){
+//     alert('window1');
+// },false);
+
+// btn.addEventListener('click',function(){
+//     alert(1);
+// },false);
+// btn.addEventListener('click',function(){
+//         alert(2);
+//     },false);
+
+
+
+btn.onclick = function(){
+   
+   alert(1);
+   
+};
+btn.onclick = function(){
+  
+    alert(2);
+    
+}
+
+
+
+
+
+</script>
+</body>
+</html>
