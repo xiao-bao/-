@@ -13,14 +13,14 @@
     position: absolute;
     left:0;
     top:0;
-    cursor: move;
+    /* cursor: move; */
 }
 </style>
 
 <body>
     <div id="box"> </div>
-    <button id="btn1">按钮</button>
-    <button id="btn2">按钮2</button>
+    <!-- <button id="btn1">按钮</button>
+    <button id="btn2">按钮2</button> -->
     <script>
 //         btn1.onclick = function () {
 //             alert('点击')
@@ -51,6 +51,7 @@
 
 box.onmousemove = function(ev){
     this.style.left = ev.clientX - this.clientWidth/2 + 'px' ;
+    console.log(ev.clientX)
     this.style.top = ev.pageY - this.clientHeight/2+ 'px';
   //  this.style.top = windth.pagaYOffset + ev.clientY - this.clientHeight/2 +'px';
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按下抬起</title>
+</head>
+<input type="text" name="" id="txt">
+<input type="text" name="" id="tt">
+<body>
+    <ul id="ul">
+     <li></li>
+    </ul>
+<script>
+/*
+当按下键盘的时候触发的事件
+onkeydown 键盘按下
+onkeyup   键盘抬起
+
+特殊按键
+ev.ctrlKey 使用这个不按ctrl这个键，输出结果都是false ，按住ctrl在按住字母或者数字按键都是true
+ev.shiftKey  使用这个不按shift这个键，不管按字母或者数字都是false，按住shift键，按住字母是true，按住数字是false
+ev.altKey  使用这个不按alt这个键，输出结果都是false ，按住alt在按住字母或者数字按键都是true
+
+
+组合键是用不了的，后面会覆盖前面的
+*/
+// txt.onkeydown = function(){
+//     console.log(this.value)
+// }
+
+
+// txt.onkeyup = function(){
+//     console.log(this.value)
+// }
+
+txt.onkeyup = function(ev){
+   if(ev.keyCode ===13){
+    ul.innerHTML += `<li>${this.value}</li>`;
+    // console.log(ev.keyCode)
+    this.value = ''; //清空输入栏
+   }
+   
+}
+
+// 
+//     if(ev.keyCode ===13){
+//     ul.innerHTML += `<li>${this.value}</li>`;
+//     // console.log(ev.keyCode)
+//     this.value = ''; //清空输入栏
+//    }
+
+// }
+tt.onkeyup = function(ev){
+console.log(ev.shiftKey)
+
+}
+
+
+
+
+</script>  
+</body>
+</html>

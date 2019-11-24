@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 50px;
+            height: 50px;
+            /* background: limegreen; */
+            border: 2px solid lawngreen;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box2 {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: blue;
+            top: 5px;
+            left: 43px;
+            position: absolute;
+            transition: 1s;
+        }
+    </style>
+</head>
+<div id="box">
+    <div id="box2"></div>
+</div>
+
+<body>
+    <script>
+        // 这里操作的是box为什么不用box而是document，因为box是没有onkeydown这个东西的
+
+        //offsetTop 是当前元素的上外边框到父级的上内边框的距离
+        //解决换键不卡  加个定时器，因为系统默认换键400秒执行， 加入定时器换键让16.7秒执行，clearInterval(timer); 加上这个原因是开心的定时器关掉之前的
+        // let timer;
+        // document.onkeydown = function (ev) {
+        //     clearInterval(timer);
+        //     timer = setInterval(() => {
+        //         switch (ev.keyCode) { //判断按下的键是哪个
+        //             case 87: //上
+        //                 box.style.top = box.offsetTop - 5 + 'px';
+        //                 break;
+        //             case 83: //下
+        //                 box.style.top = box.offsetTop + 5 + 'px';
+        //                 break;
+        //             case 65: //左
+        //                 box.style.left = box.offsetLeft - 5 + 'px';
+        //                 break;
+        //             case 68://右
+        //                 box.style.left = box.offsetLeft + 5 + 'px';
+        //                 break;
+        //             case 13: //子弹
+        //                 let div = document.createElement('div');
+        //                 div.className = 'box2';
+        //                 box.append(div);
+        //                 setTimeout(() => {
+        //                     div.style.top = -1000 + 'px';
+        //                 });
+        //                 break;
+
+        //             default:
+        //                 break;
+        //         }
+        //     }, 16.7)
+
+        // }
+
+        // document.onkeyup = function () {
+        //     clearInterval(timer);
+        // }
+
+        //方案二 这种方法可以斜着走
+
+        let timer;
+        let e = 0;
+        let obj = {};
+        document.onkeydown = function (ev) {
+            e = ev.keyCode;
+            obj[e] = true;
+
+            if(!timer){ //当为false开启定时器
+                timer = setInterval(fn, 16.7);
+            }
+        }
+
+        
+        let fn = () => {
+            if (obj['87']) {
+                box.style.top = box.offsetTop - 5 + 'px';
+            }
+            if (obj['83']) {
+                box.style.top = box.offsetTop + 5 + 'px';
+            }
+            if (obj['65']) {
+                box.style.left = box.offsetLeft - 5 + 'px';
+            }
+            if (obj['68']) {
+                box.style.left = box.offsetLeft + 5 + 'px';
+            }
+            console.log(1)
+        };
+        timer = setInterval(fn, 16.7);
+
+        document.onkeyup = function (ev) {
+            obj[ev.keyCode] = false; //按键抬起关闭
+            if (Object.values(obj).every(item => !item)) { clearInterval(timer) 
+                timer = null;
+            } //当所有的按键都没有按，关闭定时器
+           
+        }
+
+
+
+    </script>
+</body>
+
+</html>

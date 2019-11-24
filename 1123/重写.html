@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        Function.prototype.myCall = function (that, ...arg) {
+            let type = typeof that  //判断里面放的是什么 因为没有这个判断 不能判断string，number，boolean
+            if (that === null || that === undefined) { //判断放的this是不是 null 和undefined,他们本身指向就是window
+                that = window
+            } else {
+                switch (type) {
+                    case 'string':
+                        that = new String(that);
+                        break;
+                    case 'number':
+                        that = new Number(that);
+                        break;
+                    case 'boolean':
+                        that = new Boolean(that);
+                        break;
+                }
+            }
+            that.myCall = this;  // 改变this指向  that是原始this指向  this 新的指向        
+            that.myCall(...arg)  //调用放的的参数     
+        }
+       
+
+        function fn() {
+            //delete this.myCall 
+            console.log(this)
+           
+        }
+        let obj = {
+            name: 'xiaoing'
+        }
+        //obj.myCall=fn 
+        fn.myCall('11')     // delete this.myCall  想要删除这个只能放在fn里面
+        fn.call('11')       //this的指向是11，调用的函数时fn输出的结果是fn里面的东西 （就相当于把fn的输出结果给到了11）
+       // fn.call.call('11')  //如果有好几个call ，第一个参数是调用函数，第二个参数是this指向，后面参数是实参
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

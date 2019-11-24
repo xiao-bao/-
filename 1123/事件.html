@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件单词的作用</title>
+<style>
+#box{
+    width: 100px;
+    height: 100px;
+    border: 2px solid lawngreen;
+    background: lightpink;
+}
+
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <select name="" id="select">
+        <option value="">上海</option>
+        <option value="">背景</option>
+        <option value="">北京</option>txt
+       
+    </select>
+    <input type="text" id="input">
+    <input type="text" id="txt" maxlength="10"><span id="sp">0</span>/10字
+    <input type="text" id="tx" >
+    <input type="text" id="tx1" >
+
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+    <button id="btn3">按钮3</button>
+    <button id="btn4">按钮4</button>
+    <button id="btn5">按钮5</button>
+    <button id="btn6">按钮6</button>
+
+<script>
+   /*
+   事件
+   onclick 点击
+   onmouseover  移入
+   onmouseout   移出
+   onload  当页面加载完成以后再执行函数中的代码, 可以不按代码从上从上往下执行
+   onchange 输入框内容改变触发（select改变value的值也会触发）
+   oninput  输入内容的时候触发  用的最多
+   onerror  加载失败
+   onresize 可视窗口发生变化  就是屏幕大小不一样
+   onscroll  滚动条发生变化
+   maxlength="10" 文本框最多输入是个字
+   onblur  失焦 用于表单元素
+   onfocus  聚焦   用于表单元素
+   
+   
+   ### 元素身上自带事件，事件的默认值为null  ，只要带on的就是事件， DOM0
+   tx1.onfocus = function(){ }  代表 onfocus 事件绑定了函数  属于事件函数  用户点击出现null 说明有这个事件但没触发， 出现undefined的说明没有这个事件
+ 
+   事件就是某个条件成立触发
+
+   */
+         
+const box = document.getElementById('box');          
+console.log(box)
+
+select.onchange = function (){ //onchange 
+    console.log ('2')
+}   
+
+input.onchange =function (){ //输入的时候不触发，点击一下其他地方触发  
+    console.log ('1')  //换成图片同一张图片不会触发，换一张就会
+}  
+txt.oninput =function(){//maxlength="10" 文本框最多输入是个字  目前都是用这个，
+    sp.innerText =this.value.length;
+}       
+        
+tx.onblur = function(){ ////输入的时候不触发，点击一下其他地方触发失焦的时候触发（和onchange 没发现什么区别）
+    console.log ('3')
+}        
+ 
+tx1.onfocus = function(){ // 聚焦 点输入框就触发
+    console.log ('4')
+}
+
+
+/*
+
+  onmousedown    鼠标按下
+  onmouseup      鼠标抬起
+  onmousemove    鼠标滑动  鼠标移动到目标身上就会触发
+  onmouseenter   鼠标移入
+  onmouseleave   鼠标移出
+  onmousewheel   滚轮
+
+*/
+
+btn1.onmousedown =function(){ //鼠标按下触发
+   console.log('1')
+}
+btn2.onmouseup = function(){ //鼠标抬起触发
+    console.log('2')
+}
+
+//长按
+function changan(cb){
+   let timer;
+   btn3.onmousedown = function(){
+     let time = +new Date; //按下的时当时的时间
+    timer = setInterval(()=>{
+        let now = new Date; //按下按钮现在的时间
+        if(now - time>100){
+           // console.log('长按') 
+            cb()//显示的是按下多少时间
+        }      
+    });
+    btn3.onmouseup =function(){
+        clearInterval(timer)
+        // box.style.opacity=1; 
+    }
+};
+}
+//changan()
+//长按让图片隐藏，传入形参，然后调用形参，其实就相当于把（）里的函数放在长按中执行
+let num = 1;
+changan(function(){
+    
+    num -=.01;
+    box.style.opacity=num;
+})
+
+
+box.onmousemove = function(){ // onmousemove  鼠标移动到目标身上就会触发
+    console.log('显示')
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>

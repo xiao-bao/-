@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    .box1{
+        width: 50px;
+        height: 50px;
+        background: blue;
+    }
+    .box2{
+        width: 100px;
+        height: 100px;
+        background:lawngreen;
+    }
+    .box3{
+        width: 150px;
+        height: 150px;
+        background:lightcoral;
+    }
+    .box4{
+        width: 200px;
+        height: 200px;
+        background:lightskyblue;
+    }
+
+</style>
+</head>
+<body>
+    <div id="box4">
+        <div  id="box3">
+            <div  id="box2">
+                <div  id="box1">
+                   <button id="btn">显示</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <input type="text" value="哈哈" id="txt">
+<script>
+    /*
+     中间有不一样的，其他父级还是继续冒泡，中间哪个跳过
+
+     getElements系列和children 都是动态获取   querySelectorAll 是静态获取
+      ev.target  拿到事件触发的当前元素
+
+      ### 父级绑定事件点击子集元素也是可以使用这个事件 函数参数需要加ev  
+      
+      tagName 是标签名
+    */
+box4.onclick = function (){
+    alert('4')
+}
+box3.onclick = function (){
+    alert('3')
+}
+box2.oninput = function (){
+    alert('其他')
+}
+box1.onclick = function (){
+    alert('1')
+}
+btn.onclick = function (){
+    alert('按钮')
+}
+
+let lis = document.getElementsByTagName('li');
+console.log(lis)
+for(let i=0; i<lis.length;i++){
+    ul.appendChild(lis[i]) //document操作都是剪切不是复制
+} //2431
+
+ul.onclick = function(ev){ //tagName 是标签名
+    // ev.target  拿到事件触发的当前元素
+    if(ev.target.tagName === 'LI'){ //ev元素名是大写
+    ev.target.style.background ="red"; // 加事件要加可以操作样式 ev.target
+    }
+}
+
+/*
+如果在事件外面拿到数据， 事件套事件可以拿到
+
+*/
+let num = 0;
+txt.oninput = function(){
+    val = txt,value;
+    num++;
+    console.log(num) //可以拿到num++后的数
+}
+console.log(num) //这样是拿不到txt事件num++后的数据，如果想要在外面拿到拿到txt事件数据 事件套事件
+
+document. onclick =function(){ //这样可以拿到num++后的数据
+    console.log(num)
+}
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

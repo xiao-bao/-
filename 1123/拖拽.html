@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+#box {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: lightskyblue;
+}
+</style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+    /*
+        三大事件组成:
+            onmousedown
+            onmousemove
+            onmouseup
+
+        先要触发down，然后才能move和up
+        要是想跟着鼠标跑，move和up 放在document上，不放在box上
+    */
+box.onmousedown = function (ev) {
+    
+    let disX = ev.pageX; // 这个是开始按下的ev.pageX     
+    let disY = ev.pageY;
+    console.log(disY)
+    let t = box.offsetTop;//
+    let l = box.offsetLeft;
+    box.onmousemove = function (ev) {
+    console.log(ev.pageX)
+    //移动的坐标
+    box.style.left =l +  (ev.pageX - disX) + 'px'; //ev.pageX是松开后的哪个点滑动后的距离
+    box.style.top = t + (ev.pageY - disY) + 'px';
+// 不加上 t 和l 下次再点直接回到原点了，因为ev.pageX - disX 求的是移动距离，box.style.left 这个是盒子的上下左右的距离
+    }
+     box.onmouseup = function () {
+         console.log('up');
+         box.onmousemove = null;
+     }
+}
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 3000px;">
+<script>
+/*
+onscroll   滚动条触发
+onmousewheel  滚轮事件
+查看滚轮向上还是向下
+ ev.wheelDeltaev  
+
+火狐只能BOM2
+DOMMouseScroll
+ev.detail>0 向下
+ev.detail<0 向上
+*/  
+window.onmousewheel = function(ev){
+  if(ev.wheelDelta>0){
+      console.log('向上')
+  }
+  if(ev.wheelDelta<0){
+      console.log('向下')
+  }
+}
+
+
+window.addEventListener('DOMMouseScroll',function(ev){
+  if ( ev.detail>0 ){
+    console.log('向下')
+  }
+  if(ev.detail<0 ){
+    console.log('向上')
+  }
+})
+
+//让两个浏览器兼容
+
+function addWheel(obj,cb){
+        if(obj.onmousewheel === null){ //说明有这个事件
+            obj.onmousewheel = listen;
+        }else{  
+            obj.addEventListener('DOMMouseScroll',listen);
+        }
+        function listen(ev){
+            let o = false; //默认是向下，true向上
+            //使上下方向统一
+            if(ev.wheelDelta){ //chrome
+                o = ev.wheelDelta > 0? true : false;
+            }else{
+                o = ev.detail < 0 ? true : false;
+            }
+            cb.call(this,o);
+        }
+    }
+    addWheel(box,function(o){
+        console.log(1)
+        let {width,height} = getComputedStyle(this);
+        console.log(width)
+        if(o){
+            this.style.width = parseFloat(width) + 5 + 'px';
+            this.style.height = parseFloat(height) + 5 + 'px';
+        }else{
+            this.style.width = parseFloat(width) - 5 + 'px';
+            this.style.height = parseFloat(height) - 5 + 'px';
+        }
+    });
+
+</script>
+</body>
+</html>
