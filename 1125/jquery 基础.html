@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery 基础</title>
+</head>
+<body>
+    <div id="box"></div>
+<input type="text" name="" id="">
+<script>
+/*
+## jquery  
+  是一个js的类库，他简化了DOM的操作，动画操作，兼容性，数据请求操作。
+  中文网站 https://www.jquery123.com/
+
+
+
+  ## 学习项目
+    选择器
+    属性操作
+    DOM
+    事件
+
+console.log($('#box')); 获取的是一个jquery对象，因为juquery
+
+css如何选择，jq就如何选择
+
+
+### 选择器
+
+$('#box')  获取 id
+$('li')     获取所有li
+$('.active') 获取css名为active
+$('#box li') 获取box下的li
+
+$(this).val() //读取当前value的内容
+$('input[type="button"]') 也可以写成$(':button')  // 获取input为button的文本框   属性选择器
+$('input ！[type="button"]')   //  获取除了button的所有input的文本框
+$('input [class="b"]') //获取class名带b的
+$('input [class$="b"]') //获取class名带结尾带b的
+$(':checked') 获取选中的元素
+$(':button：eq(3)')  //获取第三个按钮
+$(':button：list')  //获取最后一个按钮
+$("p.test").hide() - 隐藏所有 class="test" 的 <p> 元素
+
+even偶数，因en').css('background','red') 
+$('#li li:odd').css('background','green')
+
+
+### 属性操作
+
+attr = getAttribute,setAttribute
+removeAttr  =  removeAttribute
+prop  主要用来表单判断，返回值是布尔值
+val = value
+html = innerHTML
+text = innerText
+
+
+$('#box').attr('index','0')  给box填加 属性为index = 0的属性   ('index','0') 两个单词是操作   ('index') 一个单词是获取
+$('#box').attr('data-index')
+
+
+表单要用 prop 来判断 
+$(':button').prop('data-index')
+
+
+### 样式操作
+$('#li').css('background') 获取li的颜色
+$('#li').css('background','green') 把li的颜色改为green
+$('#li').css({    批量操作
+    width: 200,
+    'background','green'
+}) 
+
+$('#li').css('display','none') = $('#li').hide()   隐藏
+$('#li').css('display','block') = $('#li').show()   显示
+
+
+find 什么下的
+imgBox.find('span')  获取imgBox下的span
+ 
+*/
+
+</script>
+</body>
+</html>

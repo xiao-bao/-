@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">添加</button>
+    <ul id="ul"></ul>
+    <script src="../jquery/jquery.min.js"></script>
+  <script>
+    /*
+    jqyery 增删改查
+
+    添加元素  $(`<li></li>`)
+
+    事件中的this。默认是原生对象
+    jquery元素都可以链式调用
+
+    parent.prepend(child)  等同于 insertBefore
+    
+    
+    */
+    
+let num =0;
+ $('#btn').click(function(){
+
+let $li = $(`<li>${++num}</li>`).css({ // 添加li和内容改变 和添加样式
+    width:30,
+    height:30
+});
+
+$li.click(function(){ //删除li
+    $(this).remove();
+});
+
+$('#ul').prepend($li); //把li插入到ul
+
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    </script>  
+
+
+
+
+</body>
+</html>
